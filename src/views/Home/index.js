@@ -1,5 +1,43 @@
 import React from "react";
+import ReactMapGL from "react-map-gl";
+import "./Home.scss";
+
+import { useState } from "react";
+import { render } from "react-dom";
+import MapGL, { GeolocateControl } from "react-map-gl";
 
 export default function Home(props) {
-  return <div>{props.userName}</div>;
+  const geolocateStyle = {
+    top: 0,
+    left: 0,
+    margin: 10,
+  };
+  const positionOptions = { enableHighAccuracy: true };
+
+  let [viewport, setViewport] = React.useState({
+    latitude: 37.7577,
+    longitude: -122.4376,
+    zoom: 8,
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+  return (
+    <div id="map">
+      <ReactMapGL
+        mapStyle="mapbox://styles/mapbox/dark-v9"
+        mapboxApiAccessToken={
+          "pk.eyJ1Ijoic2FoaWxndWphciIsImEiOiJja3I5YzhydGwzOXAxMnBzNmRiZ3RnejlmIn0.Lj50j-TnJi7JyGGGoDAKEA"
+        }
+        {...viewport}
+        onViewportChange={(newView) => setViewport(newView)}
+      >
+        <GeolocateControl
+          style={geolocateStyle}
+          positionOptions={positionOptions}
+          trackUserLocation
+          auto
+        />
+      </ReactMapGL>
+    </div>
+  );
 }
