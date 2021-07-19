@@ -3,7 +3,7 @@ import { Grid } from "@material-ui/core";
 import { Button } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import { ReactComponent as Logo } from "../../assets/drone4.svg";
+import { ReactComponent as Logo } from "../../assets/drone2.svg";
 import { useHistory } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Navbar(props) {
   const classes = useStyles();
   const history = useHistory();
+  console.log(history);
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -37,14 +38,13 @@ export default function Navbar(props) {
           >
             <Logo height={60} width={60} />
           </IconButton>
-          <Typography variant="h3" className={classes.title}>
+          <Typography variant="h4" className={classes.title}>
             Airprobe
           </Typography>
           {props.isLoggedIn ? (
             <Button
-              // style={{ marginTop: "0.5rem" }}
               variant="contained"
-              color="primary"
+              color="secondary"
               onClick={() => {
                 props.setIsLoggedIn(false);
                 history.push("/");
@@ -54,12 +54,11 @@ export default function Navbar(props) {
             </Button>
           ) : (
             <Button
-              // style={{ marginTop: "0.5rem" }}
               onClick={() => {
                 history.push("/signup");
               }}
               variant="contained"
-              color="primary"
+              color="secondary"
             >
               SignUp
             </Button>

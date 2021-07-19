@@ -6,8 +6,8 @@ import {
   Route,
   BrowserRouter as Router,
 } from "react-router-dom";
-// import { createBrowserHistory } from "history";
 import "mapbox-gl/dist/mapbox-gl.css";
+import bgImage from "./assets/bg1.jpg";
 
 import Login from "./views/Login";
 import Signup from "./views/Signup";
@@ -16,21 +16,22 @@ import Home from "./views/Home";
 import Navbar from "./components/navbar";
 
 function App() {
-  // const history = createBrowserHistory();
   const [userName, setUserName] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState(null);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
   return (
-    <div className="App">
-      <div></div>
+    <div
+      class="bg_image"
+      style={{
+        backgroundImage: `url(${bgImage})`,
+        backgroundSize: "cover",
+        height: "100vh",
+      }}
+    >
       <Router>
-        <Navbar
-          isLoggedIn={isLoggedIn}
-          setIsLoggedIn={setIsLoggedIn}
-          // history={history}
-        />
+        <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         {/* <ModuleLoader /> */}
         <Switch>
           <Route
