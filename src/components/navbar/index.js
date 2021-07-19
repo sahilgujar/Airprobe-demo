@@ -6,47 +6,66 @@ import Toolbar from "@material-ui/core/Toolbar";
 import { ReactComponent as Logo } from "../../assets/drone4.svg";
 import { useHistory } from "react-router-dom";
 
+import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+}));
+
 export default function Navbar(props) {
+  const classes = useStyles();
   const history = useHistory();
   return (
-    <AppBar position="static">
-      <Toolbar>
-        <Grid container spacing={24}>
-          <Logo height={60} width={60} />
-          <Grid item xs={11}>
-            <h1>Airprobe</h1>
-          </Grid>
-
-          <Grid item xs={24}>
-            <div>
-              {props.isLoggedIn ? (
-                <Button
-                  style={{ marginTop: "0.5rem" }}
-                  variant="contained"
-                  color="primary"
-                  onClick={() => {
-                    props.setIsLoggedIn(false);
-                    history.push("/");
-                  }}
-                >
-                  Logout
-                </Button>
-              ) : (
-                <Button
-                  style={{ marginTop: "0.5rem" }}
-                  onClick={() => {
-                    history.push("/signup");
-                  }}
-                  variant="contained"
-                  color="primary"
-                >
-                  SignUp
-                </Button>
-              )}
-            </div>
-          </Grid>
-        </Grid>
-      </Toolbar>
-    </AppBar>
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="menu"
+          >
+            <Logo height={60} width={60} />
+          </IconButton>
+          <Typography variant="h3" className={classes.title}>
+            Airprobe
+          </Typography>
+          {props.isLoggedIn ? (
+            <Button
+              // style={{ marginTop: "0.5rem" }}
+              variant="contained"
+              color="primary"
+              onClick={() => {
+                props.setIsLoggedIn(false);
+                history.push("/");
+              }}
+            >
+              Logout
+            </Button>
+          ) : (
+            <Button
+              // style={{ marginTop: "0.5rem" }}
+              onClick={() => {
+                history.push("/signup");
+              }}
+              variant="contained"
+              color="primary"
+            >
+              SignUp
+            </Button>
+          )}
+        </Toolbar>
+      </AppBar>
+    </div>
   );
 }
