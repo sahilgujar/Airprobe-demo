@@ -8,7 +8,6 @@ import { useHistory } from "react-router-dom";
 
 export default function Navbar(props) {
   const history = useHistory();
-  console.log(history);
   return (
     <AppBar position="static">
       <Toolbar>
@@ -22,11 +21,11 @@ export default function Navbar(props) {
             <div>
               {props.isLoggedIn ? (
                 <Button
+                  style={{ marginTop: "0.5rem" }}
                   variant="contained"
                   color="primary"
                   onClick={() => {
                     props.setIsLoggedIn(false);
-                    console.log(history);
                     history.push("/");
                   }}
                 >
@@ -34,6 +33,7 @@ export default function Navbar(props) {
                 </Button>
               ) : (
                 <Button
+                  style={{ marginTop: "0.5rem" }}
                   onClick={() => {
                     history.push("/signup");
                   }}

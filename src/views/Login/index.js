@@ -16,7 +16,10 @@ export default function Login(props) {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       console.log(props);
-      if (values.email == props.userName && values.password == props.password) {
+      if (
+        values.email === props.userName &&
+        values.password === props.password
+      ) {
         props.setIsLoggedIn(true);
         history.push("/home");
       } else {
@@ -27,8 +30,8 @@ export default function Login(props) {
 
   return (
     <div>
-      <Container maxWidth="sm">
-        <form style={{ marginTop: "2rem" }} onSubmit={formik.handleSubmit}>
+      <Container maxWidth="xs">
+        <form style={{ marginTop: "4rem" }} onSubmit={formik.handleSubmit}>
           <TextField
             fullWidth
             id="email"
@@ -64,7 +67,7 @@ export default function Login(props) {
             Submit
           </Button>
         </form>
-        <Button
+        {/* <Button
           onClick={() => {
             console.log(props.history);
             props.history.push("/signup");
@@ -76,7 +79,7 @@ export default function Login(props) {
           color="primary"
         >
           Sign up
-        </Button>
+        </Button> */}
       </Container>
     </div>
   );

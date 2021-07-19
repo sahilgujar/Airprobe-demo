@@ -28,7 +28,7 @@ export default function Signup(props) {
   return (
     <div>
       <Container maxWidth="sm">
-        <form onSubmit={formik.handleSubmit}>
+        <form style={{ marginTop: "4rem" }} onSubmit={formik.handleSubmit}>
           <TextField
             fullWidth
             id="email"
