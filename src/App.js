@@ -1,7 +1,12 @@
-import React, { useRef, useEffect, useState } from "react";
+import React from "react";
 import "./App.css";
-import { Switch, Redirect, Route, Router } from "react-router-dom";
-import { createBrowserHistory } from "history";
+import {
+  Switch,
+  Redirect,
+  Route,
+  BrowserRouter as Router,
+} from "react-router-dom";
+// import { createBrowserHistory } from "history";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 import Login from "./views/Login";
@@ -11,20 +16,27 @@ import Home from "./views/Home";
 import Navbar from "./components/navbar";
 
 function App() {
-  const history = createBrowserHistory();
-  const [userName, setUserName] = React.useState("vi@gmail.com");
-  const [password, setPassword] = React.useState("Vijay@123");
-  const [confirmPassword, setConfirmPassword] = React.useState("Vijay@123");
-  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
+  // const history = createBrowserHistory();
+  const [userName, setUserName] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [confirmPassword, setConfirmPassword] = React.useState(null);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
   return (
     <div className="App">
-      <div className="App">
-        <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-      </div>
-      <Router history={history}>
+      <div></div>
+      <Router>
+        <Navbar
+          isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
+          // history={history}
+        />
         {/* <ModuleLoader /> */}
         <Switch>
+          <Route
+            render={(matchProps) => <Home {...matchProps} />}
+            path="/home"
+          />
           <Route
             render={(matchProps) => (
               <Login
@@ -44,13 +56,6 @@ function App() {
           <Redirect exact from="/" to={isLoggedIn ? "/home" : "/"} />
 
           <Route
-            exact
-            path="/home"
-            render={(matchProps) => (
-              <Home isLoggedIn={isLoggedIn} history={history} {...matchProps} />
-            )}
-          />
-          <Route
             render={(matchProps) => (
               <Signup
                 setPassword={setPassword}
@@ -59,10 +64,8 @@ function App() {
                 {...matchProps}
               />
             )}
-            exac
             path="/signup"
           />
-          <Route exact path="/home" />
         </Switch>
       </Router>
     </div>

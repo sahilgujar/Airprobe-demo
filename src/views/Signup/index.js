@@ -3,8 +3,11 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
+import { Container } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 
 export default function Signup(props) {
+  const history = useHistory();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -17,75 +20,76 @@ export default function Signup(props) {
       props.setUserName(values.email);
       props.setPassword(values.password);
       props.setConfirmPassword(values.confirmPassword);
-      props.history.push("/");
+      history.push("/");
       alert(JSON.stringify(values, null, 2));
     },
   });
 
   return (
     <div>
-      <form onSubmit={formik.handleSubmit}>
-        <TextField
-          fullWidth
-          id="email"
-          name="email"
-          label="Email"
-          value={formik.values.email}
-          onChange={formik.handleChange}
-          error={formik.touched.email && Boolean(formik.errors.email)}
-          helperText={formik.touched.email && formik.errors.email}
-        />
-        <TextField
-          fullWidth
-          id="password"
-          name="password"
-          label="Password"
-          type="password"
-          value={formik.values.password}
-          onChange={formik.handleChange}
-          error={formik.touched.password && Boolean(formik.errors.password)}
-          helperText={formik.touched.password && formik.errors.password}
-        />
-        <TextField
-          fullWidth
-          id="confirmPassword"
-          name="confirmPassword"
-          label="Confirm Password"
-          type="password"
-          value={formik.values.confirmPassword}
-          onChange={formik.handleChange}
-          error={
-            formik.touched.confirmPassword &&
-            Boolean(formik.errors.confirmPassword)
-          }
-          helperText={
-            formik.touched.confirmPassword && formik.errors.confirmPassword
-          }
-        />
-        <Button
+      <Container maxWidth="sm">
+        <form onSubmit={formik.handleSubmit}>
+          <TextField
+            fullWidth
+            id="email"
+            name="email"
+            label="Email"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            error={formik.touched.email && Boolean(formik.errors.email)}
+            helperText={formik.touched.email && formik.errors.email}
+          />
+          <TextField
+            fullWidth
+            id="password"
+            name="password"
+            label="Password"
+            type="password"
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            helperText={formik.touched.password && formik.errors.password}
+          />
+          <TextField
+            fullWidth
+            id="confirmPassword"
+            name="confirmPassword"
+            label="Confirm Password"
+            type="password"
+            value={formik.values.confirmPassword}
+            onChange={formik.handleChange}
+            error={
+              formik.touched.confirmPassword &&
+              Boolean(formik.errors.confirmPassword)
+            }
+            helperText={
+              formik.touched.confirmPassword && formik.errors.confirmPassword
+            }
+          />
+          <Button
+            style={{
+              marginTop: "2rem",
+            }}
+            color="primary"
+            variant="contained"
+            type="submit"
+          >
+            Signup
+          </Button>
+        </form>
+        {/* <Button
+          onClick={() => {
+            props.history.push("/");
+          }}
           style={{
             marginTop: "2rem",
           }}
-          color="primary"
           variant="contained"
-          fullWidth
-          type="submit"
+          color="primary"
         >
-          Signup
-        </Button>
-      </form>
-      <Button
-        onClick={() => {
-          props.history.push("/");
-        }}
-        style={{
-          marginTop: "2rem",
-        }}
-        variant="contained"
-        color="primary"
-      >
-        Login in
-      </Button>
+          Login in
+        </Button> */}
+      </Container>
     </div>
   );
 }

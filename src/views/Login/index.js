@@ -3,8 +3,11 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
+import { Container } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 
 export default function Login(props) {
+  const history = useHistory();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -12,12 +15,10 @@ export default function Login(props) {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      if (
-        values.email === props.userName &&
-        values.password === props.password
-      ) {
+      console.log(props);
+      if (values.email == props.userName && values.password == props.password) {
         props.setIsLoggedIn(true);
-        props.history.push("/home");
+        history.push("/home");
       } else {
         alert("Password or username is incorrect");
       }
@@ -26,51 +27,57 @@ export default function Login(props) {
 
   return (
     <div>
-      <form onSubmit={formik.handleSubmit}>
-        <TextField
-          fullWidth
-          id="email"
-          name="email"
-          label="Email"
-          value={formik.values.email}
-          onChange={formik.handleChange}
-          error={formik.touched.email && Boolean(formik.errors.email)}
-          helperText={formik.touched.email && formik.errors.email}
-        />
-        <TextField
-          fullWidth
-          id="password"
-          name="password"
-          label="Password"
-          type="password"
-          value={formik.values.password}
-          onChange={formik.handleChange}
-          error={formik.touched.password && Boolean(formik.errors.password)}
-          helperText={formik.touched.password && formik.errors.password}
-        />
+      <Container maxWidth="sm">
+        <form style={{ marginTop: "2rem" }} onSubmit={formik.handleSubmit}>
+          <TextField
+            fullWidth
+            id="email"
+            name="email"
+            label="Email"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            error={formik.touched.email && Boolean(formik.errors.email)}
+            helperText={formik.touched.email && formik.errors.email}
+          />
+          <TextField
+            fullWidth
+            id="password"
+            name="password"
+            label="Password"
+            type="password"
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            helperText={formik.touched.password && formik.errors.password}
+          />
+          <Button
+            color="primary"
+            variant="contained"
+            style={{
+              marginTop: "2rem",
+            }}
+            type="submit"
+            // onClick={() => {
+            //   props.history.push("/home");
+            // }}
+          >
+            Submit
+          </Button>
+        </form>
         <Button
-          color="primary"
-          variant="contained"
+          onClick={() => {
+            console.log(props.history);
+            props.history.push("/signup");
+          }}
           style={{
             marginTop: "2rem",
           }}
-          type="submit"
+          variant="contained"
+          color="primary"
         >
-          Submit
+          Sign up
         </Button>
-      </form>
-      <Button
-        onClick={() => {
-          props.history.push("/signup");
-        }}
-        style={{
-          marginTop: "2rem",
-        }}
-        variant="contained"
-        color="primary"
-      >
-        Sign up
-      </Button>
+      </Container>
     </div>
   );
 }

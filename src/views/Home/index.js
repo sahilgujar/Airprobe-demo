@@ -1,6 +1,6 @@
 import React from "react";
 import ReactMapGL from "react-map-gl";
-import MapGL, { GeolocateControl } from "react-map-gl";
+import { GeolocateControl } from "react-map-gl";
 
 export default function Home(props) {
   const geolocateStyle = {
