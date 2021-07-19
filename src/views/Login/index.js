@@ -7,7 +7,9 @@ import { Container } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 
 export default function Login(props) {
+  // using history from react-router-dom to get and change components as per our state
   const history = useHistory();
+  //using formik for for validation and froms
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -60,30 +62,16 @@ export default function Login(props) {
               marginTop: "2rem",
             }}
             type="submit"
-            // onClick={() => {
-            //   props.history.push("/home");
-            // }}
           >
             Submit
           </Button>
         </form>
-        {/* <Button
-          onClick={() => {
-            console.log(props.history);
-            props.history.push("/signup");
-          }}
-          style={{
-            marginTop: "2rem",
-          }}
-          variant="contained"
-          color="primary"
-        >
-          Sign up
-        </Button> */}
       </Container>
     </div>
   );
 }
+
+// Field level validation
 
 const validationSchema = yup.object({
   email: yup

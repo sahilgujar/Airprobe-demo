@@ -16,6 +16,7 @@ import Home from "./views/Home";
 import Navbar from "./components/navbar";
 
 function App() {
+  // Storing Hard coded values in React.Usestate
   const [userName, setUserName] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState(null);
@@ -30,6 +31,7 @@ function App() {
         height: "100vh",
       }}
     >
+      {/* using Router to route between pages as per state */}
       <Router>
         <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         {/* <ModuleLoader /> */}

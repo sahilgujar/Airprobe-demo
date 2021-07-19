@@ -16,12 +16,13 @@ export default function Signup(props) {
     },
     validationSchema: validationSchemaForSignup,
     onSubmit: (values) => {
-      console.log(values);
       props.setUserName(values.email);
       props.setPassword(values.password);
       props.setConfirmPassword(values.confirmPassword);
       history.push("/");
-      alert(JSON.stringify(values, null, 2));
+      alert(
+        "You have successfully registered! please log back in to continue and know your live location!"
+      );
     },
   });
 

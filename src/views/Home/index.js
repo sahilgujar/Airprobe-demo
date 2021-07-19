@@ -19,6 +19,7 @@ export default function Home(props) {
   });
   return (
     <div id="map">
+      {/* Rendering map component using mapbox library for react react-map-gl */}
       <ReactMapGL
         mapStyle="mapbox://styles/mapbox/dark-v9"
         mapboxApiAccessToken={
@@ -30,6 +31,7 @@ export default function Home(props) {
         <GeolocateControl
           style={geolocateStyle}
           positionOptions={positionOptions}
+          // tracking user location
           trackUserLocation
           auto
         />
