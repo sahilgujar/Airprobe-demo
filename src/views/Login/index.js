@@ -5,7 +5,6 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 
 export default function Login(props) {
-  console.log(props);
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -13,12 +12,6 @@ export default function Login(props) {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log(
-        values.email,
-        props.userName,
-        values.password,
-        props.password
-      );
       if (
         values.email === props.userName &&
         values.password === props.password
@@ -55,7 +48,14 @@ export default function Login(props) {
           error={formik.touched.password && Boolean(formik.errors.password)}
           helperText={formik.touched.password && formik.errors.password}
         />
-        <Button color="primary" variant="contained" fullWidth type="submit">
+        <Button
+          color="primary"
+          variant="contained"
+          style={{
+            marginTop: "2rem",
+          }}
+          type="submit"
+        >
           Submit
         </Button>
       </form>

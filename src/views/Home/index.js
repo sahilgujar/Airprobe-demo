@@ -1,9 +1,5 @@
 import React from "react";
 import ReactMapGL from "react-map-gl";
-import "./Home.scss";
-
-import { useState } from "react";
-import { render } from "react-dom";
 import MapGL, { GeolocateControl } from "react-map-gl";
 
 export default function Home(props) {

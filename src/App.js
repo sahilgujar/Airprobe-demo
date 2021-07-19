@@ -8,21 +8,20 @@ import Login from "./views/Login";
 import Signup from "./views/Signup";
 import Home from "./views/Home";
 
+import Navbar from "./components/navbar";
+
 function App() {
   const history = createBrowserHistory();
   const [userName, setUserName] = React.useState("vi@gmail.com");
   const [password, setPassword] = React.useState("Vijay@123");
-  const [confirmPassword, setConfirmPassword] = React.useState("vi");
+  const [confirmPassword, setConfirmPassword] = React.useState("Vijay@123");
   const [isLoggedIn, setIsLoggedIn] = React.useState(true);
-
-  const mapContainer = useRef(null);
-  const map = useRef(null);
-  const [lng, setLng] = React.useState(-70.9);
-  const [lat, setLat] = React.useState(42.35);
-  const [zoom, setZoom] = React.useState(9);
 
   return (
     <div className="App">
+      <div className="App">
+        <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+      </div>
       <Router history={history}>
         {/* <ModuleLoader /> */}
         <Switch>
@@ -42,21 +41,13 @@ function App() {
             exact
             path="/"
           />
-          <Redirect
-            mapContainer={mapContainer}
-            map={map}
-            lat={lat}
-            lng={lng}
-            zoom={zoom}
-            exact
-            from="/"
-            to={isLoggedIn ? "/home" : "/"}
-          />
+          <Redirect exact from="/" to={isLoggedIn ? "/home" : "/"} />
+
           <Route
             exact
             path="/home"
             render={(matchProps) => (
-              <Home userName={userName} {...matchProps} />
+              <Home isLoggedIn={isLoggedIn} history={history} {...matchProps} />
             )}
           />
           <Route
